@@ -1,0 +1,57 @@
+<ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+	  xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	  xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="titulo">Pesquisa Clientes</ui:define>
+    
+    <ui:define name="corpo">
+      <h:form>
+		<h1>Pesquisa Clientes</h1>
+		
+		<p:toolbar style="margin-top: 20px;">
+			<p:toolbarGroup >
+				<p:commandButton value="Pesquisar" />
+			</p:toolbarGroup>
+			<p:toolbarGroup align="right">
+				<p:button value="Novo" outcome="/clientes/CadastroCliente" />
+			</p:toolbarGroup>
+		</p:toolbar>    
+		
+		<p:panelGrid columns="2" id="painel" style="widht: 100%; margin-top: 20px;" columnClasses="rotulo , campo">
+			
+			<p:outputLabel value="CPF/CNPJ" for="cpfCnpj" />
+			<p:inputText id="cpfCnpj" size="14" />
+			
+			<p:outputLabel value="Nome" for="nome" />
+			<p:inputText id="nome" size="40" />
+			
+		</p:panelGrid>
+		
+		<p:dataTable id="pedidosTable" value="#{pesquisaClientesBean.clientesFiltrados}" var="cliente"
+	    		style="margin-top: 20px" emptyMessage="Nenhum cliente encontrado."
+	    		rows="20" paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom">
+	    		
+	    		<p:column headerText="Número" style="text-align: center; width: 100px">
+	    			<h:outputText value="12345"/>
+	    		</p:column>
+	    		<p:column headerText="Nome">
+	    			<h:outputText value="Supermercado João das Couves"/>
+	    		</p:column>
+	    		<p:column headerText="Tipo">
+	    			<h:outputText value="Física"/>
+	    		</p:column>
+	    		<p:column headerText="CPF/CNPJ" style="width: 100px">
+	    			<h:outputText value="045.111.222-45"/>
+	    		</p:column>
+	    		<p:column style="text-align: center; width: 100px">
+					<p:button icon="ui-icon-pencil" title="Editar" />
+					<p:commandButton icon="ui-icon-trash" title="Excluir"  disabled="#{not seguranca.excluirClientePermitido}"/>
+				</p:column>
+	    	</p:dataTable>
+		
+      </h:form>
+    </ui:define>
+</ui:composition>

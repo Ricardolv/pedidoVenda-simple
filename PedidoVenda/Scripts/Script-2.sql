@@ -1,0 +1,1 @@
+insert into usuario (nome, email, senha) values ('Maria', 'maria@abadia.com', '123');
